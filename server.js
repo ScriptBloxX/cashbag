@@ -52,7 +52,7 @@ passport.use(new GoogleStrategy({
 
 passport.serializeUser( (user, done) => { 
     user_.createAccount(user).then(result=>{
-        if(result==='success'){
+        if(result){
             done(null, user);
         }
     })
@@ -121,7 +121,6 @@ app.post('/api/new-shortcut',(req,res)=>{
         amount: req.body.form.amount
     }
     api_.create_shortcut(auth_token.id,data).then(result=>{
-        console.log("debug 2",result);
         if(result==='success'){
             res.send(result);
         }else{

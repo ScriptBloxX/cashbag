@@ -18,8 +18,9 @@ async function createAccount(data){
     const accountCheck = await db.collection('users').doc(user.id).get();
     if(!accountCheck.data()){
         await db.collection('users').doc(user.id).set(user);
-        return 'success';
+        return true;
     }
+    return true;
 }
 
 async function getAccountData(id){
