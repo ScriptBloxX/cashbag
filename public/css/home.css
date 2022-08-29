@@ -1,0 +1,432 @@
+body{
+    overflow: hidden;
+}
+.container{
+    display: flex;
+}
+.viewver{
+    margin: auto auto;
+}
+
+/* chart / graph */
+.cash-chart,.cash-status{
+    width: 100%;
+    display: flex;
+    padding-top: 2rem;
+    justify-content: center;
+}
+.cash-chart canvas{
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    max-height: 400px;
+}
+.cash-status{
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+}
+.cash-status h2{
+    color: var(--main_gray);
+    transition: .3s all linear;
+}
+.cash-status h2:hover{
+    transform: scale(1.2);
+}
+span{
+    color: var(--main_red);
+    transition: .3s all linear;
+}
+span[class=current]{
+    color: var(--main_yellow);
+}
+span[class=maximum]{
+    color: var(--main_green);
+}
+span[class=accumulate]{
+    color: #37bef3;
+}
+
+/* menu */
+.menu{
+    position: relative;
+    background-color: #242429;
+    left: 0;
+    top: 0;
+    width: 20%;
+    min-width: 172px;
+    height: 100vh;
+    padding: 1rem;
+
+    transition: all linear .5s;
+    z-index: 3;
+}
+.menu h1{
+    user-select: none;
+    color: var(--main_green);
+    transition: all linear .2s;
+    width: max-content;
+    padding-bottom: 1rem;
+}
+.menu h1 span{
+    color: var(--main_gray);
+}
+.menu h1:hover{
+    transform: scale(1.1);
+    letter-spacing: 10px;
+}
+.menu h2{
+    margin-top: 1rem;
+    padding: .5rem;
+    color: var(--little_white);
+    background-color: var(--main_gray);
+    cursor: pointer;
+    transition: all linear .2s;
+}
+.menu h2:hover{
+    letter-spacing: 1px;
+    color: var(--main_white);
+    background-color: var(--main_bg);
+}
+.menu .menu-active{
+    letter-spacing: 1px;
+    color: var(--main_white);
+    background-color: var(--main_bg);
+}
+.menu a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.8rem;
+    padding: .2rem;
+    border-radius: 2px;
+    background-color: var(--main_red);
+
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    bottom: 1rem;
+    transition: all linear .2s;
+}
+.menu a:hover{
+    letter-spacing: 2px;
+}
+.menu-button{
+    position: fixed;
+    bottom: 0;
+    font-size: 1.5rem;
+    padding: .5rem;
+    z-index: 3;
+    transition: all linear .2s;
+    cursor: pointer;
+    display: none;
+}
+.menu-button i{
+    color: var(--main_white);
+    transition: all linear .3s;
+}
+.menu-button:hover i,.menu-button:hover{
+    color: var(--main_green);
+    transform: scale(1.2) rotate(90deg);
+}
+
+/* statement */
+.statement{
+    width: 100%;
+    min-width: 600px;
+    height: 90vh;
+    background-color: #151518;
+    border-radius: 10px;
+    overflow: hidden;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.statement h2{
+    color: #fff;
+    padding: 1rem;
+}
+.statement h3{
+    color: var(--little_white);
+}
+.statement-container{
+    background-color: #242429;
+    width: 80%;
+    height: 100%;
+    padding: 1rem;
+
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.statement-container::-webkit-scrollbar-corner{
+    display: none;
+}
+.statement-container::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+}
+.statement-container::-webkit-scrollbar-thumb{
+    background-color: #37f385;
+    border-radius: 25px;
+    height: 2px;
+}
+.statement-container .statement-data{
+    display: flex;
+    gap: 1rem;
+    justify-content:space-between;
+
+    flex-wrap: wrap;
+    transition: all linear .2s;
+}
+.statement-container .statement-data:hover{
+    background-color: var(--main_bg);
+    transform: scale(1.1);
+}
+.statement-container .statement-data h2:nth-child(2){
+    color: var(--main_yellow);
+}
+.statement .statement-container .green{
+    color: var(--main_green);
+}
+.statement .statement-container .red{
+    color: var(--main_red);
+}
+
+/* modify */
+.modify{
+    width: 100%;
+    height: 80vh;
+}
+.modify form{
+    padding: 1rem;
+}
+.modify form input,.shortcut-form input{
+    margin-top: 1rem;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    border-bottom: 2px solid var(--main_green);
+    color: var(--main_white);
+    width: 100%;
+}
+.modify form button,.create-shortcut-btn{
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+
+    background-color: var(--main_yellow);
+    padding: .5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all linear .1s;
+    text-align: center;
+
+    transition: all linear .2s;
+}
+.modify form button:hover,.create-shortcut-btn:hover{
+    background-color: #af8a24;
+    transform: scale(1.05);
+}
+
+.shortcut-form{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 100%;
+    padding: 1rem;
+    background-color: #151518;
+    z-index: 1;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+
+    opacity: 0;
+    transform: scale(0);
+    transition: all linear .4s;
+}
+.shortcut-active{
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    opacity: 1;
+    transform: scale(1);
+}
+.shortcut-form input{
+    border-bottom: 2px solid var(--main_yellow);
+}
+
+.shortcut-container{
+    width: 100%;
+    height: max-content;
+    padding: 1rem;
+    background-color: #242429;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content:flex-start;
+    overflow:scroll;
+}
+.shortcut-container::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+}
+.shortcut-container::-webkit-scrollbar-thumb{
+    background-color: var(--main_green);
+    border-radius: 25px;
+    height: 2px;
+}
+.shortcut-container::-webkit-scrollbar-corner{
+    background-color: transparent;
+}
+
+
+.shortcut-container .shortcut-button{
+    position: relative;
+    width: max-content;
+    padding: 1rem;
+    background-color: var(--main_bg);
+    cursor: pointer;
+    transition: all linear .1s;
+    overflow: hidden;
+}
+.shortcut-container .shortcut-button:hover{
+    background-color: #151518;
+    transform: scale(1.1);
+}
+.shortcut-container .shortcut-button h2{
+    color: var(--little_white);
+}
+.shortcut-container .shortcut-button .green{
+    color: var(--main_green);
+}
+.shortcut-container .shortcut-button .red{
+    color: var(--main_red);
+}
+
+.shortcut-container .shortcut-button .click{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+}
+
+.shortcut{
+    position: absolute;
+    background-color: var(--main_yellow);
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    bottom: 1rem;
+    right: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+
+    cursor: pointer;
+    transition: all linear 1s;
+}
+
+.shortcut i{
+    font-size: 4rem;
+    color: var(--main_white);
+}
+.shortcut:hover{
+    background-color: #af8a24;
+    transform: scale(1.1) rotate(90deg);
+}
+
+.hide{
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* menu btn */
+.view_container{
+    position: absolute;
+    transform: scale(0);
+    opacity: 0;
+    visibility: hidden;
+    transition: all linear .3s;
+}
+.active{
+    position: relative;
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* responsive */
+@media only screen and (max-width:1000px) {
+    .graph{
+        max-width: 600px;
+    }
+}
+@media only screen and (max-width:790px) {
+    .statement{
+        min-width: 0;
+        height: 100vh;
+    }
+    .graph{
+        max-width: 350px;
+    }
+}
+@media only screen and (max-width:530px) {
+    .graph{
+        max-width: 300px;
+    }
+}
+@media only screen and (max-width:480px) {
+    .menu{
+        position: absolute;
+        left: -100%;
+        width: 100%;
+        transition: all linear .2s;
+    }
+    .menu-active{
+        left: 0;
+    }
+    .menu-button{
+        display: unset;
+    }
+    .menu-button-active i,.menu-button-active{
+        color: var(--main_green);
+        transform: scale(1.2) rotate(90deg);
+    }
+    .modify{
+        height: 100vh;
+    }
+}
+@media only screen and (max-width:300px) {
+    .graph{
+        max-width: 200px;
+    }
+}
+
+.loading-screen{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #060905;
+    z-index: 99;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading-screen img{
+    -webkit-user-drag: none;
+}

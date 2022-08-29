@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://CashBag.klmaemn.repl.co">
+    <meta property="og:title" content="CashBag">
+    <meta property="og:description" content="Save edit your income and expenses right here!">
+    <meta property="og:image" content="image/cashbag.png">
+
+    <title>CashBag</title>
+    <link rel="stylesheet" href="css/root.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="image/cashbag.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+</head>
+<body>
+  <div class="loading-screen">
+    <img src="image/loading.gif">
+  </div>
+  <div class="container">
+    <div class="menu">
+      <h1>CASH<span>BAG</span></h1>
+      <h2 id="graph" class="menu-btn menu-active">Spending Graph</h2>
+      <h2 id="statement" class="menu-btn">Statement</h2>
+      <h2 id="modify" class="menu-btn">Modify</h2>
+      <!-- <a href="/logout">Logout</a> -->
+    </div>
+    <div class="viewver">
+
+      <div class="graph view_container active">
+        <div class="cash-chart">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="cash-status">
+          <h2>Minimal <span>C</span>ash : <span class="minimal"><%=data.cash.minimal_cash%></span></h2>
+          <h2><span>C</span>urrent <span>C</span>ash : <span class="current"><%=data.cash.current_cash%></span></h2>
+          <h2>Maximum <span>C</span>ash : <span class="maximum"><%=data.cash.maximum_cash%></span></h2>
+          <h2>Accumulate <span>C</span>ash : <span class="accumulate"><%=data.cash.accumulate_cash%></span></h2>
+        </div>
+      </div>
+
+      <div class="statement view_container">
+
+        <%if(data.statement.length>0){%>
+        <h2>STATEMENT</h2>
+        <div class="statement-container">
+          <%data.statement.reverse()%>
+          <%data.statement.forEach(obj=>{ %>
+            <div class="statement-data">
+              <h2><%=obj.date%></h2>
+              <h2><%=obj.desc%></h2>
+              <%if(obj.amount<0){%>
+                <h2 class="red"><%=obj.amount%></h2>
+              <%}else{%>
+              <h2 class="green"><%=obj.amount%></h2>
+              <%}%>
+            </div>
+          <%})%>
+        </div>
+        <%}else{%>
+          <h3>Couldn't find your statement information.</h3>
+        <%}%>
+
+      </div>
+
+      <div class="modify view_container">
+        <form method="post" action="/modify">
+          <input name="desc" placeholder="Description" required>
+          <input name="amount" type="number" placeholder="Amount" required>
+          <button class="modify-btn">Modify</button>
+        </form>
+
+        <%if(data.shortcut.length>0){%>
+          <div class="shortcut-container">
+        <%}else{%>
+          <div class="shortcut-container hide">
+        <%}%>
+          <%data.shortcut.forEach(obj=>{ %>
+          <div class="shortcut-button">
+            <h2><%=obj.desc%></h2>
+            <%if(obj.amount<0){%>
+              <h3 class="red"><%=obj.amount%></h2>
+            <%}else{%>
+              <h3 class="green"><%=obj.amount%></h2>
+            <%}%>
+            <div class="click"></div>
+          </div>
+          <%})%>
+
+        </div>
+        <div class="shortcut-form">
+          <input id="shortcut-desc" placeholder="Description" required>
+          <input id="shortcut-amount" type="number" placeholder="Amount" required>
+          <div class="create-shortcut-btn">New Shortcut</div>
+        </div>
+        <div class="shortcut">
+          <i class="ri-add-line"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="menu-button">
+      <i class="ri-menu-line"></i>
+    </div>
+  </div>    
+
+    <!-- script   -->
+
+    <script src="js/loading-screen.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/home_menu.js"></script>
+    <script src="js/shortcut.js"></script>
+
+    <script>
+    var statement = '<%- JSON.stringify(data.statement)%>'
+    xyCal(JSON.parse(statement))
+    </script>
+
+</body>
+</html>
