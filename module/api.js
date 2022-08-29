@@ -49,7 +49,6 @@ async function create_shortcut(id,shortcut_data){
     const doc = db.collection('users').doc(id);
     const getDoc = await doc.get();
     const data = getDoc.data();
-
     if(data){
         return await doc.update({
             'shortcut': FieldValue.arrayUnion(shortcut_data),

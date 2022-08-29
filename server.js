@@ -51,8 +51,11 @@ passport.use(new GoogleStrategy({
 }, authUser));
 
 passport.serializeUser( (user, done) => { 
-    done(null, user);
-    user_.createAccount(user);
+    user_.createAccount(user).then(result=>{
+        if(result==='success'){
+            done(null, user);
+        }
+    })
 } )
 
 passport.deserializeUser((user, done) => {
@@ -79,7 +82,12 @@ app.get('/',ifNotLoggedIn,(req,res,next)=>{
         displayName: req.session.passport.user.displayName
     }
     user_.getAccountData(auth_token.id).then(result=>{
-        res.render('home',{account: auth_token,data: result});
+        if(result!=='error - account not found!'){
+            res.status(400).render('home',{account: auth_token,data: result});
+        }else{
+            req.session = null;
+            res.redirect('/');
+        }
     });
 });
 
@@ -113,8 +121,12 @@ app.post('/api/new-shortcut',(req,res)=>{
         amount: req.body.form.amount
     }
     api_.create_shortcut(auth_token.id,data).then(result=>{
+        console.log("debug 2",result);
         if(result==='success'){
             res.send(result);
+        }else{
+            req.session = null;
+            res.send('error-test');
         }
     });
 });

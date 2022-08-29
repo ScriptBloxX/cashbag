@@ -18,6 +18,7 @@ async function createAccount(data){
     const accountCheck = await db.collection('users').doc(user.id).get();
     if(!accountCheck.data()){
         await db.collection('users').doc(user.id).set(user);
+        return 'success';
     }
 }
 
@@ -32,7 +33,7 @@ async function getAccountData(id){
         }
         return obj;
     }else{
-        return 'error - account not found';
+        return 'error - account not found!';
     }
 }
 
