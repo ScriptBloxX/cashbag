@@ -6,11 +6,14 @@ var ns_per_week = ['Comming Soon'];
 var ps_per_week = [1];
 var ns_per_month = [];
 var ps_per_month = [];
+var ns_per_year = [];
+var ps_per_year = [];
 
 // ID config
 const day = 'analysis_today';
 const week = 'analysis_week';
 const month = 'analysis_month';
+const year = 'analysis_year';
 
 var newDate = new Date();
 var today_Date = getDate.getDate() + '/' + parseInt(getDate.getMonth() + 1) + '/' + getDate.getFullYear();
@@ -91,7 +94,7 @@ function analysisChart(statements) {
   // month
   var Spending = 0;
   statements.forEach(statement => {
-    const getMonth = statement.date.substring(statement.date.indexOf('/')+1,statement.date.indexOf('/')+2);
+    const getMonth = statement.date.substring(statement.date.indexOf('/') + 1, statement.date.indexOf('/') + 2);
 
     if (parseInt(getMonth) === parseInt(getDate.getMonth() + 1) && statement.amount < 0) {
       var spend = statement.amount * -1
@@ -129,4 +132,48 @@ function analysisChart(statements) {
   });
   document.querySelector(`#${month}`).style.width = "300px";
   document.querySelector(`#${month}`).style.height = "300px";
+
+  // year
+  var Spending = 0;
+  statements.forEach(statement => {
+    const year_reverse = statement.date.split('').reverse().join('');
+    const getYear = year_reverse.substring(0, year_reverse.indexOf('/')).split('').reverse().join('');
+
+    if (parseInt(getYear) === parseInt(getDate.getFullYear()) && statement.amount < 0) {
+      var spend = statement.amount * -1
+      ns_per_year.push(statement.desc);
+      ps_per_year.push(spend);
+      Spending = Spending + spend;
+    }
+  });
+
+  document.querySelector('#paid_year').innerHTML = `Spending Year : ${Spending}`;
+  // pie chart
+  new Chart(`${year}`, {
+    type: "pie",
+    data: {
+      labels: ns_per_year,
+      datasets: [{
+        label: 'Spending Year',
+        data: ps_per_year,
+        backgroundColor: [
+          '#F7ECDE',
+          '#E9DAC1',
+          '#9ED2C6',
+          '#54BAB9'
+        ],
+        hoverOffset: 10
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false,
+        }
+      },
+      maintainAspectRatio: false,
+    }
+  });
+  document.querySelector(`#${year}`).style.width = "300px";
+  document.querySelector(`#${year}`).style.height = "300px";
 }

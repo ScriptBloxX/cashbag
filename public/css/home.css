@@ -406,9 +406,13 @@ canvas{
         max-width: 600px;
     }
 }
-@media only screen and (max-width:851px) {
+@media only screen and (max-width:1049px) {
     .chart-container{
         justify-content: center;
+    }
+    .pie-chart canvas{
+        max-width: 150px;
+        max-height: 150px;
     }
 }
 @media only screen and (max-width:790px) {
@@ -418,6 +422,12 @@ canvas{
     }
     .graph{
         max-width: 350px;
+    }
+}
+@media only screen and (max-width:648px) {
+    .pie-chart canvas{
+        max-width: 120px;
+        max-height: 120px;
     }
 }
 @media only screen and (max-width:530px) {
@@ -447,6 +457,10 @@ canvas{
     }
     .menu a{
         bottom: 3rem;
+    }
+    .pie-chart canvas{
+        min-width: 250px;
+        min-height: 250px;
     }
 }
 @media only screen and (max-width:300px) {
