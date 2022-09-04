@@ -445,6 +445,9 @@ canvas{
     .modify{
         height: 100vh;
     }
+    .menu a{
+        bottom: 3rem;
+    }
 }
 @media only screen and (max-width:300px) {
     .graph{
