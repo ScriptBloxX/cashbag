@@ -35,7 +35,6 @@ document.querySelector('.create-shortcut-btn').addEventListener('click',()=>{
             if(res.data==='success'){
                 window.location.href = '/';
             }
-            console.log(res.data);
         }).catch(err=>{
             console.log(err);
         });
@@ -47,13 +46,14 @@ document.querySelectorAll('.shortcut-button').forEach(sc_btn=>{
         const parentTarget = e.target.parentNode;
  
         ls(true);
-        axios.post(`modify`,{
+        axios.post(`/modify`,{
             desc: parentTarget.querySelector('h2').innerHTML,
             amount: parentTarget.querySelector('h3').innerHTML
         }).then(()=>{
-                window.location.href = '/';
+            window.location.href = '/';
         }).catch(err=>{
             console.log(err);
+            window.location.href = '/';
         });
     });
 })

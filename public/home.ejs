@@ -26,6 +26,7 @@
     <div class="menu">
       <h1>CASH<span>BAG</span></h1>
       <h2 id="graph" class="menu-btn menu-active">Spending Graph</h2>
+      <h2 id="analysis" class="menu-btn">Analysis</h2>
       <h2 id="statement" class="menu-btn">Statement</h2>
       <h2 id="modify" class="menu-btn">Modify</h2>
       <!-- <a href="/logout">Logout</a> -->
@@ -103,6 +104,33 @@
         </div>
       </div>
 
+      <div class="analysis view_container">
+        <div class="chart-container">
+
+          <div class="pie-box">
+            <div class="pie-chart">
+              <canvas id="analysis_today"></canvas>
+            </div>
+            <h2 id="paid_today">Spending Today : N/A</h2>
+          </div>
+
+          <div class="pie-box">
+            <div class="pie-chart">
+              <canvas id="analysis_week"></canvas>
+            </div>
+            <h2 id="paid_week">Spending Week : N/A</h2>
+          </div>
+
+          <div class="pie-box">
+            <div class="pie-chart">
+              <canvas id="analysis_month"></canvas>
+            </div>
+            <h2 id="paid_month">Spending Month : N/A</h2>
+          </div>
+          
+        </div>
+      </div>
+
     </div>
 
     <div class="menu-button">
@@ -115,12 +143,14 @@
     <script src="js/loading-screen.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/chart.js"></script>
+    <script src="js/analysis-chart.js"></script>
     <script src="js/home_menu.js"></script>
     <script src="js/shortcut.js"></script>
 
     <script>
-    var statement = '<%- JSON.stringify(data.statement)%>'
-    xyCal(JSON.parse(statement))
+    var statement = '<%- JSON.stringify(data.statement)%>';
+    xyCal(JSON.parse(statement));
+    analysisChart(JSON.parse(statement));
     </script>
 
 </body>

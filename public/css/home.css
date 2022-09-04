@@ -351,6 +351,36 @@ span[class=accumulate]{
     visibility: hidden;
     opacity: 0;
 }
+.hidden{
+    overflow: hidden;
+}
+
+/* analysis form*/
+.analysis{
+    min-width: 600px;;
+    min-height: 100vh;
+}
+.chart-container{
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 3rem;
+}
+.chart-container h2{
+    color: var(--little_white);
+}
+.pie-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+canvas{
+    width: 1000px;
+    height: 100px;
+}
 
 /* menu btn */
 .view_container{
@@ -369,12 +399,20 @@ span[class=accumulate]{
 
 /* responsive */
 @media only screen and (max-width:1000px) {
+    body{
+        overflow: unset;
+    }
     .graph{
         max-width: 600px;
     }
 }
+@media only screen and (max-width:851px) {
+    .chart-container{
+        justify-content: center;
+    }
+}
 @media only screen and (max-width:790px) {
-    .statement{
+    .statement,.analysis{
         min-width: 0;
         height: 100vh;
     }
