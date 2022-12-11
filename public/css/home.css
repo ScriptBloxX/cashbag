@@ -58,6 +58,8 @@ span[class=accumulate]{
     height: 100vh;
     padding: 1rem;
 
+    border-top-right-radius: 3rem;
+
     transition: all linear .5s;
     z-index: 3;
 }
@@ -376,6 +378,11 @@ span[class=accumulate]{
     justify-content: center;
     align-items: center;
     gap: 1rem;
+}
+.pie-chart{
+    background-color: #242429;
+    padding: 1rem;
+    border-radius: 1rem;
 }
 canvas{
     width: 1000px;

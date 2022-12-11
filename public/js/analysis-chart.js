@@ -2,8 +2,8 @@
 // data set
 var ns_per_day = [];
 var ps_per_day = [];
-var ns_per_week = ['Comming Soon'];
-var ps_per_week = [1];
+var ns_per_week = [];
+var ps_per_week = [];
 var ns_per_month = [];
 var ps_per_month = [];
 var ns_per_year = [];
@@ -61,6 +61,23 @@ function analysisChart(statements) {
 
   // week
   var Spending = 0;
+  statements.forEach(statement => {
+    const getMonth_Slice = statement.date.substr(statement.date.indexOf('/')+1);
+    const getMounth_Result = getMonth_Slice.substring(0,getMonth_Slice.indexOf('/'));
+    const sd = statement.date.substring(0,statement.date.indexOf('/'));
+    const date_today = newDate.getDate();
+    var day = newDate.getDay(),diff = newDate.getDate() - day + (day == 0 ? -6:1);
+    
+    if(parseInt(getMounth_Result) === parseInt(getDate.getMonth() + 1) && sd >= diff && sd <= date_today && statement.amount < 0){
+      console.log(statement);
+      var spend = statement.amount * -1
+      ns_per_week.push(statement.desc);
+      ps_per_week.push(spend);
+      Spending = Spending + spend;
+    }
+  });
+
+
   document.querySelector('#paid_week').innerHTML = `Spending Week : ${Spending}`;
   // pie chart
   new Chart(`${week}`, {
@@ -94,9 +111,10 @@ function analysisChart(statements) {
   // month
   var Spending = 0;
   statements.forEach(statement => {
-    const getMonth = statement.date.substring(statement.date.indexOf('/') + 1, statement.date.indexOf('/') + 2);
+    const getMonth_Slice = statement.date.substr(statement.date.indexOf('/')+1);
+    const getMounth_Result = getMonth_Slice.substring(0,getMonth_Slice.indexOf('/'));
 
-    if (parseInt(getMonth) === parseInt(getDate.getMonth() + 1) && statement.amount < 0) {
+    if (parseInt(getMounth_Result) === parseInt(getDate.getMonth() + 1) && statement.amount < 0) {
       var spend = statement.amount * -1
       ns_per_month.push(statement.desc);
       ps_per_month.push(spend);
